@@ -1,0 +1,3 @@
+import { describe,expect,it } from "vitest";
+import { parseCommand,serializeCommand } from "../commands";
+describe("canvas commands",()=>{it("round trips compact tile state",()=>{const c={t:"tile" as const,id:"forecast",x:.1,y:.2,w:.5,h:.6,z:4};expect(parseCommand(serializeCommand(c))).toEqual(c)});it("stays below Zoom payload limit",()=>{const p=serializeCommand({t:"focus",id:"revenue"});expect(new TextEncoder().encode(p).length).toBeLessThanOrEqual(512)})});
